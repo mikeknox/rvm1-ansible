@@ -98,14 +98,14 @@ _ruby 2.2.2, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
 #### System wide installation
 
 The above example would setup ruby system wide. It's very important that you
-run the play with sudo because it will need to write to `/usr/local/rvm`.
+run the play with 'become' because it will need to write to `/usr/local/rvm`.
 
 #### To the same user as `ansible_ssh_user`
 
 In this case, just overwrite `rvm_install_path` and set the `--user-install` flag:
 
-**Note:** you still need to use sudo because during the ruby
-  installation phase rvm will internally make calls using sudo
+**Note:** you still need to use 'become' because during the ruby
+  installation phase rvm will internally make calls using become
   to install certain ruby dependencies.
 
 ```yaml
@@ -115,7 +115,7 @@ rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
 
 #### To a user that is not `ansible_ssh_user`
 
-You **will need sudo here** because you will be writing outside the ansible
+You **will need become here** because you will be writing outside the ansible
 user's home directory. Other than that it's the same as above, except you will
 supply a different user account:
 
